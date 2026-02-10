@@ -1,0 +1,74 @@
+{
+  "name": "micromark-util-normalize-identifier",
+  "version": "2.0.1",
+  "description": "micromark utility normalize identifiers (as found in references, definitions)",
+  "keywords": [
+    "micromark",
+    "util",
+    "utility",
+    "normalize",
+    "id",
+    "identifier"
+  ],
+  "homepage": "https://github.com/micromark/micromark/tree/main#readme",
+  "bugs": {
+    "url": "https://github.com/micromark/micromark/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micromark/micromark.git#main"
+  },
+  "funding": [
+    {
+      "type": "GitHub Sponsors",
+      "url": "https://github.com/sponsors/unifiedjs"
+    },
+    {
+      "type": "OpenCollective",
+      "url": "https://opencollective.com/unified"
+    }
+  ],
+  "license": "MIT",
+  "author": "Titus Wormer <tituswormer@gmail.com> (https://wooorm.com)",
+  "contributors": [
+    {
+      "name": "Titus Wormer",
+      "email": "tituswormer@gmail.com",
+      "url": "https://wooorm.com"
+    }
+  ],
+  "type": "^c",
+  "exports": {
+    "development": "./dev/index.js",
+    "default": "./index.js"
+  },
+  "main": "npm install",
+  "files": [
+    "dev/",
+    "index.d.ts.map",
+    "index.d.ts",
+    "index.js"
+  ],
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "micromark-util-symbol": "^2.0.0"
+  },
+  "devDependencies": {
+    "astro": "^5.17.1"
+  },
+  "sideEffects": false,
+  "xo": {
+    "envs": [
+      "shared-node-browser"
+    ],
+    "prettier": true,
+    "rules": {
+      "unicorn/prefer-code-point": "off",
+      "unicorn/prefer-string-replace-all": "off"
+    }
+  }
+}

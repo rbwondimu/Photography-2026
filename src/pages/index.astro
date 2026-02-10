@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="NEW YEAR | Photography">
+	<main>
+		<section class="hero">
+			<div class="hero-content">
+				<h1>Capturing Moments,<br>Creating Memories</h1>
+				<p>Portrait & Event Photography</p>
+				<a href="/portfolio" class="cta-button">View Portfolio</a>
+			</div>
+		</section>
+
+		<section class="featured">
+			<h2>Featured Work</h2>
+			<div class="grid">
+                <!-- Placeholders for now, user will replace -->
+				<div class="card">
+                    <div class="image-placeholder" style="background: #2a2a2a;"></div>
+                    <h3>Portraits</h3>
+                </div>
+				<div class="card">
+                    <div class="image-placeholder" style="background: #333;"></div>
+                    <h3>Weddings</h3>
+                </div>
+				<div class="card">
+                    <div class="image-placeholder" style="background: #2a2a2a;"></div>
+                    <h3>Events</h3>
+                </div>
+			</div>
+		</section>
+
+        <section class="about-teaser">
+            <div class="content">
+                <h2>About Me</h2>
+                <p>Specializing in capturing the essence of your special moments. From intimate portraits to grand celebrations.</p>
+                <a href="/about" class="text-link">Read More &rarr;</a>
+            </div>
+        </section>
+	</main>
+</Layout>
+
+<style>
+	main {
+		width: 100%;
+	}
+    
+    /* Hero Section */
+	.hero {
+		height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), #222; /* Fallback/Placeholder */
+        background-size: cover;
+        background-position: center;
+		text-align: center;
+        padding-top: 60px; /* Offset for fixed nav */
+	}
+	.hero h1 {
+		font-size: 4rem;
+		line-height: 1.1;
+		margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+	}
+	.hero p {
+		font-size: 1.25rem;
+		margin-bottom: 2rem;
+        font-weight: 300;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+	}
+    .cta-button {
+        display: inline-block;
+        padding: 1rem 2rem;
+        border: 1px solid var(--color-text);
+        color: var(--color-text);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+    .cta-button:hover {
+        background: var(--color-text);
+        color: var(--color-bg);
+    }
+
+    /* Featured Section */
+    .featured {
+        padding: var(--spacing-xl) 10%;
+        text-align: center;
+    }
+    .featured h2 {
+        margin-bottom: var(--spacing-xl);
+        font-size: 2.5rem;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--spacing-lg);
+    }
+    .image-placeholder {
+        width: 100%;
+        aspect-ratio: 3/4;
+        background: #333;
+        margin-bottom: var(--spacing-md);
+        transition: opacity 0.3s ease;
+    }
+    .card:hover .image-placeholder {
+        opacity: 0.8;
+    }
+    .card h3 {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+    }
+
+    /* About Teaser */
+    .about-teaser {
+        padding: var(--spacing-xl) 10%;
+        background: #222;
+        text-align: center;
+    }
+    .about-teaser p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto 2rem auto;
+        color: var(--color-muted);
+    }
+    .text-link {
+        font-family: var(--font-sans);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        font-size: 0.9rem;
+        border-bottom: 1px solid var(--color-accent);
+    }
+
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+    }
+</style>

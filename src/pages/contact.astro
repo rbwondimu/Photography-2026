@@ -1,0 +1,189 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Contact | NEW YEAR">
+    <main>
+        <div class="contact-container">
+            <section class="contact-info">
+                <h1>Let's Create Together</h1>
+                <p>Ready to book a session or have questions? Reach out using the form or the details below.</p>
+                
+                <div class="details">
+                    <div class="detail-item">
+                        <h3>Email</h3>
+                        <p><a href="mailto:hello@newyear.com">hello@newyear.com</a></p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Phone</h3>
+                        <p>+1 (555) 123-4567</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Follow</h3>
+                        <div class="socials">
+                            <a href="#">Instagram</a>
+                            <a href="#">Facebook</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Session Type</label>
+                        <select id="type" name="type">
+                            <option value="portrait">Portrait</option>
+                            <option value="wedding">Wedding</option>
+                            <option value="event">Event</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </section>
+        </div>
+    </main>
+</Layout>
+
+<style>
+    main {
+        padding-top: 80px;
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .contact-container {
+        display: flex;
+        width: 80%;
+        max-width: 1200px;
+        background: #222;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        margin: var(--spacing-xl) 0;
+    }
+
+    .contact-info {
+        flex: 1;
+        padding: var(--spacing-xl);
+        background: #1a1a1a;
+        border-right: 1px solid #333;
+    }
+
+    .contact-form {
+        flex: 1.5;
+        padding: var(--spacing-xl);
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        line-height: 1.2;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .details {
+        margin-top: var(--spacing-xl);
+    }
+
+    .detail-item {
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .detail-item h3 {
+        color: var(--color-accent);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+    }
+
+    .socials a {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--color-muted);
+    }
+    .socials a:hover {
+        color: var(--color-text);
+    }
+
+    /* Form Styles */
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        color: var(--color-muted);
+    }
+
+    input, select, textarea {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        padding: 1rem;
+        color: var(--color-text);
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: var(--color-accent);
+    }
+
+    button {
+        background: var(--color-accent);
+        color: #1a1a1a;
+        border: none;
+        padding: 1rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-top: var(--spacing-md);
+    }
+
+    button:hover {
+        background: var(--color-accent-hover);
+    }
+
+    @media (max-width: 900px) {
+        .contact-container {
+            flex-direction: column;
+            width: 100%;
+            margin: 0;
+            box-shadow: none;
+        }
+        .contact-info, .contact-form {
+            padding: var(--spacing-lg);
+        }
+        .contact-info {
+            border-right: none;
+            border-bottom: 1px solid #333;
+        }
+    }
+</style>

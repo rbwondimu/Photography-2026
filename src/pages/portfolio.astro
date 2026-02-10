@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Gallery from '../components/Gallery.astro';
+
+const categories = ["Portraits", "Weddings", "Events"];
+---
+
+<Layout title="Portfolio | NEW YEAR">
+    <main>
+        <header class="page-header">
+            <h1>Portfolio</h1>
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">All</button>
+                {categories.map(cat => (
+                    <button class="filter-btn" data-filter={cat.toLowerCase()}>{cat}</button>
+                ))}
+            </div>
+        </header>
+
+        <section class="gallery-section">
+            <Gallery category="Recent Work" />
+        </section>
+    </main>
+</Layout>
+
+<script>
+    // Simple client-side filtering logic (placeholder for now)
+    const buttons = document.querySelectorAll('.filter-btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all
+            buttons.forEach(b => b.classList.remove('active'));
+            // Add to clicked
+            btn.classList.add('active');
+            
+            // In a real implementation, this would filter the gallery items
+            console.log(`Filtering by ${btn.getAttribute('data-filter')}`);
+        });
+    });
+</script>
+
+<style>
+    main {
+        padding-top: 80px; /* Offset for nav */
+        min-height: 100vh;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .page-header {
+        text-align: center;
+        padding: var(--spacing-xl) var(--spacing-md);
+        background: #222;
+    }
+
+    h1 {
+        font-size: 3rem;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .filter-bar {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-md);
+        flex-wrap: wrap;
+    }
+
+    .filter-btn {
+        background: transparent;
+        border: none;
+        color: var(--color-muted);
+        font-family: var(--font-sans);
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        padding: 0.5rem 1rem;
+        transition: color 0.3s ease;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+        color: var(--color-accent);
+    }
+
+    .gallery-section {
+        padding: var(--spacing-lg) 5%;
+    }
+</style>
