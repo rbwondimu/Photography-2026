@@ -1,9 +1,10 @@
 ---
 interface Props {
     category?: string;
+    limit?: number;
 }
 
-const { category = "All" } = Astro.props;
+const { category = "All", limit } = Astro.props;
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
@@ -11,6 +12,16 @@ import { Image } from 'astro:assets';
 const allImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/portfolio/**/*.{jpeg,jpg,png,gif,JPEG,JPG,PNG,GIF}');
 
 let images = Object.keys(allImages);
+
+// Sort images by name (or date if we could extract it easily, but name is stable)
+// Desired order might be reverse alphabetical to show newest "M" or "Z" files first? 
+// Or just random? Let's stick to default sort for now.
+images.sort();
+
+// Apply limit
+if (limit) {
+    images = images.slice(0, limit);
+}
 
 // Map to useful objects
 const loadedImages = await Promise.all(
