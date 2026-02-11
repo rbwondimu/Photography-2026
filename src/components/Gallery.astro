@@ -2,9 +2,10 @@
 interface Props {
     category?: string;
     limit?: number;
+    seamless?: boolean;
 }
 
-const { category = "All", limit } = Astro.props;
+const { category = "All", limit, seamless = false } = Astro.props;
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
@@ -46,23 +47,27 @@ const placeholderImages = Array.from({ length: 9 }).map((_, i) => ({
 }));
 ---
 
-<div class="gallery-grid">
+<div class:list={["gallery-grid", { seamless }]}>
     {!usePlaceholders && loadedImages.map((img) => (
         <div class="gallery-item">
-            <Image src={img.src} alt={img.title} width={600} height={800} class="image-real" />
-            <div class="overlay">
-                <h3>{img.title}</h3>
-            </div>
+            <Image src={img.src} alt={img.title} width={1200} height={1600} class="image-real" />
+            {!seamless && (
+                <div class="overlay">
+                    <h3>{img.title}</h3>
+                </div>
+            )}
         </div>
     ))}
 
     {usePlaceholders && placeholderImages.map((img) => (
         <div class="gallery-item">
             <div class="image-placeholder" style={`background-color: ${img.color};`}></div>
-            <div class="overlay">
-                <h3>{img.title}</h3>
-                <p style="font-size: 0.8rem; opacity: 0.8;">(Placeholder)</p>
-            </div>
+            {!seamless && (
+                <div class="overlay">
+                    <h3>{img.title}</h3>
+                    <p style="font-size: 0.8rem; opacity: 0.8;">(Placeholder)</p>
+                </div>
+            )}
         </div>
     ))}
 </div>
@@ -75,21 +80,45 @@ const placeholderImages = Array.from({ length: 9 }).map((_, i) => ({
         padding: var(--spacing-md) 0;
     }
     
+    .gallery-grid.seamless {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 0;
+    }
+
     .gallery-item {
         position: relative;
         overflow: hidden;
+        /* aspect-ratio: 3/4;  Remove aspect ratio for seamless to allow natural height */
+    }
+
+    .gallery-grid:not(.seamless) .gallery-item {
         aspect-ratio: 3/4;
         cursor: pointer;
+    }
+    
+    /* Allow natural height in seamless mode */
+    .gallery-grid.seamless .gallery-item {
+        width: 100%;
+        height: auto;
     }
 
     .image-placeholder, .image-real {
         width: 100%;
         height: 100%;
+        display: block; /* Remove whitespace */
         transition: transform 0.5s ease;
         object-fit: cover;
     }
+    
+    .gallery-grid.seamless .image-real {
+        height: auto;
+        object-fit: contain; /* Show full image */
+    }
 
-    .gallery-item:hover .image-placeholder {
+    .gallery-grid:not(.seamless) .gallery-item:hover .image-placeholder,
+    .gallery-grid:not(.seamless) .gallery-item:hover .image-real {
         transform: scale(1.05);
     }
 

@@ -5,14 +5,10 @@ import Gallery from '../components/Gallery.astro';
 const categories = ["Portraits", "Weddings", "Events"];
 ---
 
-<Layout title="Portfolio | NEW YEAR">
+<Layout title="Portfolio | NEW YEAR" theme="light">
     <main>
-        <header class="page-header">
-            <h1>Portfolio</h1>
-        </header>
-
         <section class="gallery-section">
-            <Gallery category="Recent Work" />
+            <Gallery seamless={true} />
         </section>
     </main>
 </Layout>
@@ -41,41 +37,15 @@ const categories = ["Portraits", "Weddings", "Events"];
         box-sizing: border-box;
     }
 
-    .page-header {
-        text-align: center;
-        padding: var(--spacing-xl) var(--spacing-md);
-        background: #222;
-    }
-
-    h1 {
-        font-size: 3rem;
-        margin-bottom: var(--spacing-md);
-    }
-
-    .filter-bar {
-        display: flex;
-        justify-content: center;
-        gap: var(--spacing-md);
-        flex-wrap: wrap;
-    }
-
-    .filter-btn {
-        background: transparent;
-        border: none;
-        color: var(--color-muted);
-        font-family: var(--font-sans);
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        cursor: pointer;
-        padding: 0.5rem 1rem;
-        transition: color 0.3s ease;
-    }
-
-    .filter-btn:hover, .filter-btn.active {
-        color: var(--color-accent);
-    }
-
+    /* 
+       Page header removed from markup, but styles kept just in case 
+       or we can remove them. Let's keep main styles.
+       
+       For seamless look:
+    */
     .gallery-section {
-        padding: var(--spacing-lg) 5%;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
     }
 </style>
