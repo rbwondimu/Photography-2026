@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 
 <Layout title="NEW YEAR | Photography">
@@ -8,7 +9,7 @@ import Layout from '../layouts/Layout.astro';
 			<div class="hero-content">
 				<h1>Capturing Moments,<br>Creating Memories</h1>
 				<p>Portrait & Event Photography</p>
-				<a href="/portfolio" class="cta-button">View Portfolio</a>
+				<a href={base + "/portfolio"} class="cta-button">View Portfolio</a>
 			</div>
 		</section>
 
@@ -35,7 +36,7 @@ import Layout from '../layouts/Layout.astro';
             <div class="content">
                 <h2>About Me</h2>
                 <p>Specializing in capturing the essence of your special moments. From intimate portraits to grand celebrations.</p>
-                <a href="/about" class="text-link">Read More &rarr;</a>
+                <a href={base + "/about"} class="text-link">Read More &rarr;</a>
             </div>
         </section>
 	</main>
