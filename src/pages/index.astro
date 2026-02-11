@@ -15,21 +15,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 		<section class="featured">
 			<h2>Featured Work</h2>
-			<div class="grid">
-                <!-- Placeholders for now, user will replace -->
-				<div class="card">
-                    <div class="image-placeholder" style="background: #2a2a2a;"></div>
-                    <h3>Portraits</h3>
-                </div>
-				<div class="card">
+            <div class="portfolio-preview">
+                <a href={base + "/portfolio"} class="preview-card">
                     <div class="image-placeholder" style="background: #333;"></div>
-                    <h3>Weddings</h3>
-                </div>
-				<div class="card">
-                    <div class="image-placeholder" style="background: #2a2a2a;"></div>
-                    <h3>Events</h3>
-                </div>
-			</div>
+                    <h3>View Full Portfolio &rarr;</h3>
+                </a>
+            </div>
 		</section>
 
         <section class="about-teaser">
@@ -96,26 +87,36 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         margin-bottom: var(--spacing-xl);
         font-size: 2.5rem;
     }
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: var(--spacing-lg);
+    .portfolio-preview {
+        display: flex;
+        justify-content: center;
+    }
+    .preview-card {
+        display: block;
+        width: 100%;
+        max-width: 600px;
+        text-decoration: none;
     }
     .image-placeholder {
         width: 100%;
-        aspect-ratio: 3/4;
+        aspect-ratio: 16/9;
         background: #333;
         margin-bottom: var(--spacing-md);
         transition: opacity 0.3s ease;
     }
-    .card:hover .image-placeholder {
+    .preview-card:hover .image-placeholder {
         opacity: 0.8;
     }
-    .card h3 {
+    .preview-card h3 {
         font-family: var(--font-sans);
-        font-size: 1rem;
+        font-size: 1.2rem;
         text-transform: uppercase;
         letter-spacing: 0.1em;
+        color: var(--color-text);
+        transition: color 0.3s ease;
+    }
+    .preview-card:hover h3 {
+        color: var(--color-accent);
     }
 
     /* About Teaser */

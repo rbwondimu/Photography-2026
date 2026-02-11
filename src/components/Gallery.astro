@@ -7,32 +7,21 @@ const { category = "All" } = Astro.props;
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
 
-// Load all images from the portfolio directory
-const allImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/portfolio/*/*.{jpeg,jpg,png,gif}');
+// Load all images from the portfolio directory (recursively if needed, but primarily direct)
+const allImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/portfolio/*.{jpeg,jpg,png,gif}');
 
-let images = [];
-
-// Filter images based on category
-if (category === "All" || category === "Recent Work") {
-    // For "All", we just take everything (or a subset for Recent Work)
-    images = Object.keys(allImages);
-} else {
-    const normalizedCategory = category.toLowerCase();
-    images = Object.keys(allImages).filter(path => path.includes(`/${normalizedCategory}/`));
-}
+let images = Object.keys(allImages);
 
 // Map to useful objects
 const loadedImages = await Promise.all(
     images.map(async (path) => {
         const image = await allImages[path]();
-        const categoryMatch = path.match(/\/portfolio\/([^/]+)\//);
-        const cat = categoryMatch ? categoryMatch[1] : 'Uncategorized';
         // Extract filename as title
         const name = path.split('/').pop()?.split('.')[0] || 'Untitled';
         return {
             src: image.default,
             title: name.replace(/-/g, ' '),
-            category: cat
+            category: 'Portfolio'
         };
     })
 );
@@ -41,7 +30,7 @@ const loadedImages = await Promise.all(
 const usePlaceholders = loadedImages.length === 0;
 const placeholderImages = Array.from({ length: 9 }).map((_, i) => ({
     id: i,
-    title: `${category} Shot ${i + 1}`,
+    title: `Portfolio Shot ${i + 1}`,
     color: `hsl(${Math.random() * 360}, 50%, 40%)`
 }));
 ---
