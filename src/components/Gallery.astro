@@ -19,6 +19,9 @@ let images = Object.keys(allImages);
 // Or just random? Let's stick to default sort for now.
 images.sort();
 
+// Keep About-only profile photo out of the portfolio gallery.
+images = images.filter((path) => !path.endsWith('/profile.jpg'));
+
 // Apply limit
 if (limit) {
     images = images.slice(0, limit);
