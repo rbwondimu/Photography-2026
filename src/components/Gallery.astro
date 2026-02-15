@@ -72,6 +72,11 @@ if (images.length > 4) {
     images.push(fifth);
 }
 
+// Requested Featured tweak: when showing 6 images, swap positions 5 and 6.
+if (limit === 6 && images.length > 5) {
+    [images[4], images[5]] = [images[5], images[4]];
+}
+
 // Apply limit
 if (limit) {
     images = images.slice(0, limit);
