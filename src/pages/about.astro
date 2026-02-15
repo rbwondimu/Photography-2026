@@ -152,7 +152,11 @@ import profileImage from '../assets/portfolio/profile.jpg';
         .profile-image-container {
             width: 100%;
             max-width: 300px;
-            height: 300px;
+            height: auto;
+            aspect-ratio: 3 / 4;
+        }
+        .profile-image {
+            object-position: center top;
         }
         .philosophy-grid {
             grid-template-columns: 1fr;
