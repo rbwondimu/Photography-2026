@@ -61,6 +61,11 @@ while (numericRoll.length || uuidBatch.length || imgBatch.length || otherBatch.l
 
 images = balancedImages;
 
+// Requested manual tweak: make current 2nd image appear 1st.
+if (images.length > 1) {
+    [images[0], images[1]] = [images[1], images[0]];
+}
+
 // Apply limit
 if (limit) {
     images = images.slice(0, limit);
