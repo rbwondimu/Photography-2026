@@ -8,17 +8,26 @@ import profileImage from '../assets/portfolio/profile.jpg';
     <main>
         <section class="bio-section">
             <div class="profile-image-container">
-                <Image src={profileImage} alt="Photographer Profile" class="profile-image" />
+                <Image
+                    src={profileImage}
+                    alt="Photographer Profile"
+                    class="profile-image"
+                    widths={[320, 480, 640]}
+                    sizes="(max-width: 768px) 80vw, 300px"
+                    format="webp"
+                    quality={78}
+                    loading="eager"
+                    fetchpriority="high"
+                />
             </div>
             <div class="bio-content">
                 <h1>Behind the Lens</h1>
-                <p class="intro">Hi, I'm the eye behind Wondimu Photography.</p>
+                <p class="intro">I'm Robel Wondimu, your brother.</p>
                 <p>
-                    I believe that every photograph tells a story. My passion lies in capturing the fleeting moments that make life beautiful. 
-                    From the quiet intimacy of a portrait to the joyous celebration of a wedding, I strive to create images that are honest, emotive, and timeless.
+                    I believe every photograph tells a story. My passion lies in capturing the fleeting moments that make life beautiful. From the quiet intimacy of a portrait to the joyful celebration of a wedding, and everything in between, I strive to create images that are authentic, captivating, and timeless.
                 </p>
                 <p>
-                    With a focus on natural light and genuine connection, my goal is to make you feel comfortable and confident, allowing your true self to shine through.
+                    Shot exclusively on film, my work preserves your most priceless memories with soulful depth, refined elegance, and enduring beauty. With a focus on natural light and genuine connection, I create a space where you feel at ease, allowing your true self to shine.
                 </p>
             </div>
         </section>
@@ -74,7 +83,7 @@ import profileImage from '../assets/portfolio/profile.jpg';
     }
 
     .bio-content {
-        max-width: 500px;
+        max-width: 760px;
     }
 
     .intro {
@@ -90,15 +99,23 @@ import profileImage from '../assets/portfolio/profile.jpg';
         margin-bottom: var(--spacing-md);
     }
 
+    .bio-content p:not(.intro) {
+        text-align: justify;
+        text-justify: inter-word;
+        font-size: 0.98rem;
+        line-height: 1.6;
+        margin-bottom: 0.9rem;
+    }
+
     .philosophy {
         background: #222;
-        padding: var(--spacing-xl) 7%;
+        padding: calc(var(--spacing-xl) * 0.7) 7%;
         text-align: center;
     }
 
     .philosophy h2 {
         font-size: 1.8rem;
-        margin-bottom: var(--spacing-xl);
+        margin-bottom: calc(var(--spacing-md) + 0.5rem);
         text-align: center;
     }
 
@@ -149,6 +166,10 @@ import profileImage from '../assets/portfolio/profile.jpg';
             flex-direction: column;
             text-align: center;
         }
+        .bio-content p:not(.intro) {
+            text-align: left;
+            text-justify: auto;
+        }
         .profile-image-container {
             width: 100%;
             max-width: 300px;
@@ -160,6 +181,12 @@ import profileImage from '../assets/portfolio/profile.jpg';
         }
         .philosophy-grid {
             grid-template-columns: 1fr;
+        }
+        .philosophy {
+            padding: var(--spacing-lg) 7%;
+        }
+        .philosophy h2 {
+            margin-bottom: var(--spacing-md);
         }
         .timeless-line {
             white-space: normal;
