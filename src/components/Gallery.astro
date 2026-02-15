@@ -22,6 +22,45 @@ images.sort();
 // Keep About-only profile photo out of the portfolio gallery.
 images = images.filter((path) => !path.endsWith('/profile.jpg'));
 
+// Build a more visually balanced sequence by interleaving filename groups
+// so similar shots are less likely to appear back-to-back.
+const byNaturalName = (a: string, b: string) =>
+    a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
+
+const numericRoll: string[] = [];
+const uuidBatch: string[] = [];
+const imgBatch: string[] = [];
+const otherBatch: string[] = [];
+
+for (const path of images) {
+    const name = path.split('/').pop() || '';
+    if (/^IMG_/i.test(name)) {
+        imgBatch.push(path);
+    } else if (/^[0-9A-F]{8}-[0-9A-F]{4}-/i.test(name)) {
+        uuidBatch.push(path);
+    } else if (/^[0-9]/.test(name)) {
+        numericRoll.push(path);
+    } else {
+        otherBatch.push(path);
+    }
+}
+
+numericRoll.sort(byNaturalName);
+uuidBatch.sort(byNaturalName);
+imgBatch.sort(byNaturalName);
+otherBatch.sort(byNaturalName);
+
+const balancedImages: string[] = [];
+while (numericRoll.length || uuidBatch.length || imgBatch.length || otherBatch.length) {
+    if (numericRoll.length) balancedImages.push(numericRoll.shift()!);
+    if (uuidBatch.length) balancedImages.push(uuidBatch.shift()!);
+    if (imgBatch.length) balancedImages.push(imgBatch.shift()!);
+    if (uuidBatch.length) balancedImages.push(uuidBatch.shift()!);
+    if (otherBatch.length) balancedImages.push(otherBatch.shift()!);
+}
+
+images = balancedImages;
+
 // Apply limit
 if (limit) {
     images = images.slice(0, limit);
