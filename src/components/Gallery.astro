@@ -84,10 +84,10 @@ const placeholderImages = Array.from({ length: 9 }).map((_, i) => ({
     }
     
     .gallery-grid.seamless {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0;
-        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px 0;
     }
 
     .gallery-item {
@@ -104,7 +104,7 @@ const placeholderImages = Array.from({ length: 9 }).map((_, i) => ({
     /* Allow natural height in seamless mode */
     .gallery-grid.seamless .gallery-item {
         width: 100%;
-        aspect-ratio: 3 / 4;
+        height: auto;
     }
 
     .image-placeholder, .image-real {
@@ -113,23 +113,12 @@ const placeholderImages = Array.from({ length: 9 }).map((_, i) => ({
         display: block; /* Remove whitespace */
         transition: transform 0.5s ease;
         object-fit: cover;
+        object-position: center;
     }
     
     .gallery-grid.seamless .image-real {
-        height: 100%;
-        object-fit: cover;
-    }
-
-    @media (max-width: 1024px) {
-        .gallery-grid.seamless {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-    }
-
-    @media (max-width: 640px) {
-        .gallery-grid.seamless {
-            grid-template-columns: 1fr;
-        }
+        height: auto;
+        object-fit: contain;
     }
 
     .gallery-grid:not(.seamless) .gallery-item:hover .image-placeholder,
