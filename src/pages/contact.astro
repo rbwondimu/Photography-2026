@@ -224,5 +224,9 @@ import Layout from '../layouts/Layout.astro';
 
     if (successMessage && params.get('sent') === 'true') {
         successMessage.hidden = false;
+
+        const url = new URL(window.location.href);
+        url.searchParams.delete('sent');
+        window.history.replaceState({}, '', url);
     }
 </script>
