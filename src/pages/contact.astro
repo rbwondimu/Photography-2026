@@ -28,6 +28,9 @@ import Layout from '../layouts/Layout.astro';
             </section>
 
             <section class="contact-form">
+                <p id="contact-success" class="contact-success" role="status" aria-live="polite" hidden>
+                    Thanks, your message was sent successfully. We will get back to you soon.
+                </p>
                 <form
                     action="https://formsubmit.co/petworthportraits@gmail.com"
                     method="POST"
@@ -182,6 +185,16 @@ import Layout from '../layouts/Layout.astro';
         display: none;
     }
 
+    .contact-success {
+        margin-bottom: var(--spacing-md);
+        padding: 0.85rem 1rem;
+        border: 1px solid #2f7a43;
+        background: rgba(47, 122, 67, 0.15);
+        color: #b7f2c8;
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+    }
+
     @media (max-width: 900px) {
         .contact-container {
             flex-direction: column;
@@ -204,3 +217,12 @@ import Layout from '../layouts/Layout.astro';
         }
     }
 </style>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const successMessage = document.getElementById('contact-success');
+
+    if (successMessage && params.get('sent') === 'true') {
+        successMessage.hidden = false;
+    }
+</script>
