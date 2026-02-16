@@ -31,13 +31,16 @@ import Layout from '../layouts/Layout.astro';
                 <p id="contact-success" class="contact-success" role="status" aria-live="polite" hidden>
                     Thanks, your message was sent successfully. We will get back to you soon.
                 </p>
+                <p id="contact-error" class="contact-error" role="alert" hidden>
+                    Sorry, something went wrong sending your message. Please try again.
+                </p>
                 <form
+                    id="contact-form"
                     action="https://formsubmit.co/petworthportraits@gmail.com"
                     method="POST"
                 >
                     <input type="hidden" name="_subject" value="New message from Wondimu Photography contact form">
                     <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" id="contact-next-url" name="_next" value="/contact?sent=true">
                     <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hp-field" aria-hidden="true">
                     <div class="form-group">
                         <label for="name">Name</label>
@@ -195,6 +198,16 @@ import Layout from '../layouts/Layout.astro';
         font-size: 0.95rem;
     }
 
+    .contact-error {
+        margin-bottom: var(--spacing-md);
+        padding: 0.85rem 1rem;
+        border: 1px solid #8d2e2e;
+        background: rgba(141, 46, 46, 0.15);
+        color: #ffb4b4;
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+    }
+
     @media (max-width: 900px) {
         .contact-container {
             flex-direction: column;
@@ -219,13 +232,10 @@ import Layout from '../layouts/Layout.astro';
 </style>
 
 <script>
-    const nextUrlField = document.getElementById('contact-next-url');
-    if (nextUrlField instanceof HTMLInputElement) {
-        nextUrlField.value = `${window.location.origin}/contact?sent=true`;
-    }
-
-    const params = new URLSearchParams(window.location.search);
+    const form = document.getElementById('contact-form');
+    const errorMessage = document.getElementById('contact-error');
     const successMessage = document.getElementById('contact-success');
+    const params = new URLSearchParams(window.location.search);
 
     if (successMessage && params.get('sent') === 'true') {
         successMessage.hidden = false;
@@ -233,5 +243,42 @@ import Layout from '../layouts/Layout.astro';
         const url = new URL(window.location.href);
         url.searchParams.delete('sent');
         window.history.replaceState({}, '', url);
+    }
+
+    if (form instanceof HTMLFormElement) {
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            if (successMessage) successMessage.hidden = true;
+            if (errorMessage) errorMessage.hidden = true;
+
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (submitButton instanceof HTMLButtonElement) {
+                submitButton.disabled = true;
+                submitButton.textContent = 'Sending...';
+            }
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { Accept: 'application/json' },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Request failed');
+                }
+
+                form.reset();
+                if (successMessage) successMessage.hidden = false;
+            } catch {
+                if (errorMessage) errorMessage.hidden = false;
+            } finally {
+                if (submitButton instanceof HTMLButtonElement) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Send Message';
+                }
+            }
+        });
     }
 </script>
