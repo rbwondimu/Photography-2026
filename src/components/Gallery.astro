@@ -285,7 +285,8 @@ const placeholderImages = Array.from({ length: 9 }).map((_, i) => ({
 
     @media (max-width: 768px) {
         .gallery-grid.seamless {
-            gap: 6px;
+            gap: 2px;
+            padding: 0;
         }
 
         .gallery-grid.seamless .gallery-item {
@@ -293,13 +294,16 @@ const placeholderImages = Array.from({ length: 9 }).map((_, i) => ({
             height: auto;
             min-height: 0;
             max-height: none;
-            padding: 1.25vmin;
+            padding: 0 1.1vmin;
             display: block;
+            line-height: 0;
         }
 
         .gallery-grid.seamless .image-real {
+            width: 100%;
             height: auto;
             max-height: none;
+            display: block;
         }
     }
 
