@@ -141,8 +141,10 @@ const placeholderImages = Array.from({ length: 9 }).map((_, i) => ({
     .gallery-grid.seamless {
         display: flex;
         flex-direction: column;
-        gap: 8px;
-        padding: 8px 0;
+        gap: 0;
+        padding: 0;
+        align-items: center;
+        scroll-snap-type: y mandatory;
     }
 
     .gallery-item {
@@ -158,8 +160,16 @@ const placeholderImages = Array.from({ length: 9 }).map((_, i) => ({
     
     /* Allow natural height in seamless mode */
     .gallery-grid.seamless .gallery-item {
-        width: 100%;
-        height: auto;
+        width: min(94vw, 1280px);
+        height: calc(100vh - 120px);
+        min-height: 520px;
+        max-height: 980px;
+        padding: 2.2vmin;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        scroll-snap-align: start;
     }
 
     .image-placeholder, .image-real {
@@ -172,8 +182,24 @@ const placeholderImages = Array.from({ length: 9 }).map((_, i) => ({
     }
     
     .gallery-grid.seamless .image-real {
-        height: auto;
+        width: 100%;
+        height: 100%;
         object-fit: contain;
+        object-position: center;
+    }
+
+    .gallery-grid.seamless .image-placeholder {
+        width: 100%;
+        height: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .gallery-grid.seamless .gallery-item {
+            width: 100%;
+            height: calc(100vh - 165px);
+            min-height: 400px;
+            padding: 3.2vmin;
+        }
     }
 
     .gallery-grid:not(.seamless) .gallery-item:hover .image-placeholder,

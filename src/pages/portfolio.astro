@@ -57,23 +57,5 @@ const categories = ["Portraits", "Weddings", "Events"];
         background: var(--color-bg);
     }
 
-    /* Enforce the same seamless vertical stack treatment used for Featured Work */
-    .gallery-section :global(.gallery-grid.seamless) {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        padding: 8px 0;
-    }
-
-    .gallery-section :global(.gallery-grid.seamless .gallery-item) {
-        width: 100%;
-        height: auto;
-    }
-
-    .gallery-section :global(.gallery-grid.seamless .image-real) {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        display: block;
-    }
+    /* Seamless gallery layout is fully controlled in Gallery.astro */
 </style>
