@@ -149,6 +149,13 @@ const alternateWhiteBorderImages = async (orderedPaths: string[]) => {
 
 if (seamless) {
     images = await alternateWhiteBorderImages(images);
+
+    // Keep the request-specific ordering tweak for the seamless portfolio:
+    // move the current 5th image to the end of the sequence.
+    if (images.length > 4) {
+        const fifth = images.splice(4, 1)[0];
+        images.push(fifth);
+    }
 }
 
 // Requested manual tweak: make current 2nd image appear 1st.
