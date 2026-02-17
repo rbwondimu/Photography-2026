@@ -61,13 +61,103 @@ while (numericRoll.length || uuidBatch.length || imgBatch.length || otherBatch.l
 
 images = balancedImages;
 
+const alternateWhiteBorderImages = async (orderedPaths: string[]) => {
+    try {
+        if (orderedPaths.length <= 2) {
+            return orderedPaths;
+        }
+
+        const first = orderedPaths[0];
+        const last = orderedPaths[orderedPaths.length - 1];
+        const middlePaths = orderedPaths.slice(1, -1);
+
+        const sharpModule = await import('sharp');
+        const sharp = sharpModule.default;
+
+        const hasWhiteBorder = async (imgPath: string) => {
+            const fullPath = `${process.cwd()}${imgPath}`;
+            const { data, info } = await sharp(fullPath)
+                .greyscale()
+                .resize(48, 48, { fit: 'fill' })
+                .raw()
+                .toBuffer({ resolveWithObject: true });
+
+            const width = info.width;
+            const height = info.height;
+
+            let borderSum = 0;
+            let borderCount = 0;
+            for (let x = 0; x < width; x++) {
+                borderSum += data[x];
+                borderCount++;
+                borderSum += data[(height - 1) * width + x];
+                borderCount++;
+            }
+            for (let y = 1; y < height - 1; y++) {
+                borderSum += data[y * width];
+                borderCount++;
+                borderSum += data[y * width + (width - 1)];
+                borderCount++;
+            }
+
+            let centerSum = 0;
+            let centerCount = 0;
+            const start = Math.floor(width * 0.25);
+            const end = Math.ceil(width * 0.75);
+            for (let y = start; y < end; y++) {
+                for (let x = start; x < end; x++) {
+                    centerSum += data[y * width + x];
+                    centerCount++;
+                }
+            }
+
+            const borderAvg = borderSum / borderCount;
+            const centerAvg = centerSum / Math.max(centerCount, 1);
+            return borderAvg > 235 && borderAvg - centerAvg > 20;
+        };
+
+        const withBorder: string[] = [];
+        const withoutBorder: string[] = [];
+
+        for (const path of middlePaths) {
+            if (await hasWhiteBorder(path)) {
+                withBorder.push(path);
+            } else {
+                withoutBorder.push(path);
+            }
+        }
+
+        const alternated: string[] = [];
+        const useBorderFirst = withBorder.length > withoutBorder.length;
+
+        while (withBorder.length || withoutBorder.length) {
+            if (useBorderFirst) {
+                if (withBorder.length) alternated.push(withBorder.shift()!);
+                if (withoutBorder.length) alternated.push(withoutBorder.shift()!);
+            } else {
+                if (withoutBorder.length) alternated.push(withoutBorder.shift()!);
+                if (withBorder.length) alternated.push(withBorder.shift()!);
+            }
+        }
+
+        return [first, ...alternated, last];
+    } catch {
+        // If image analysis is unavailable, keep original ordering.
+        return orderedPaths;
+    }
+};
+
+if (seamless) {
+    images = await alternateWhiteBorderImages(images);
+}
+
 // Requested manual tweak: make current 2nd image appear 1st.
-if (images.length > 1) {
+if (!seamless && images.length > 1) {
     [images[0], images[1]] = [images[1], images[0]];
 }
 
 // Requested manual tweak: move current 5th image to the end.
-if (images.length > 4) {
+if (!seamless && images.length > 4) {
     const fifth = images.splice(4, 1)[0];
     images.push(fifth);
 }
@@ -194,11 +284,22 @@ const placeholderImages = Array.from({ length: 9 }).map((_, i) => ({
     }
 
     @media (max-width: 768px) {
+        .gallery-grid.seamless {
+            gap: 6px;
+        }
+
         .gallery-grid.seamless .gallery-item {
             width: 100%;
-            height: calc(100vh - 165px);
-            min-height: 400px;
-            padding: 3.2vmin;
+            height: auto;
+            min-height: 0;
+            max-height: none;
+            padding: 1.25vmin;
+            display: block;
+        }
+
+        .gallery-grid.seamless .image-real {
+            height: auto;
+            max-height: none;
         }
     }
 
