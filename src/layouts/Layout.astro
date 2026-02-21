@@ -14,7 +14,9 @@ import Navigation from '../components/Navigation.astro';
 		<meta charset="UTF-8" />
 		<meta name="description" content="Professional Photography Portfolio" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/png" href={import.meta.env.BASE_URL.replace(/\/$/, '') + "/fav-icon.png"} />
+		<link rel="icon" type="image/png" sizes="512x512" href={import.meta.env.BASE_URL.replace(/\/$/, '') + "/fav-icon.png"} />
+		<link rel="shortcut icon" type="image/png" href={import.meta.env.BASE_URL.replace(/\/$/, '') + "/fav-icon.png"} />
+		<link rel="apple-touch-icon" sizes="512x512" href={import.meta.env.BASE_URL.replace(/\/$/, '') + "/fav-icon.png"} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
