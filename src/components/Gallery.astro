@@ -152,6 +152,11 @@ const alternateWhiteBorderImages = async (orderedPaths: string[]) => {
 if (seamless) {
     images = await alternateWhiteBorderImages(images);
 
+    // Requested manual tweak: remove 1st photo in portfolio. This makes the 2nd image the new 1st one.
+    if (images.length > 0) {
+        images.shift();
+    }
+
     // Keep the request-specific ordering tweak for the seamless portfolio:
     // move the current 5th image to the end of the sequence.
     if (images.length > 4) {
@@ -160,9 +165,9 @@ if (seamless) {
     }
 }
 
-// Requested manual tweak: make current 2nd image appear 1st.
-if (!seamless && images.length > 1) {
-    [images[0], images[1]] = [images[1], images[0]];
+// Requested manual tweak: remove 1st photo in portfolio. This makes the 2nd image the new 1st one.
+if (!seamless && images.length > 0) {
+    images.shift();
 }
 
 // Requested manual tweak: move current 5th image to the end.
