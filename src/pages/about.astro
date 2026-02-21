@@ -75,13 +75,13 @@ import profileImage from '../assets/portfolio/profile.jpg';
         box-sizing: border-box;
         position: relative;
         padding: 10px;
-        background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(243, 239, 231, 0.9) 100%);
-        border: 0.5px solid rgba(201, 168, 106, 0.45);
+        background: linear-gradient(145deg, #2b2b2b 0%, #242424 100%);
+        border: 0.5px solid var(--color-border);
         border-radius: 10px;
         box-shadow:
             0 18px 36px rgba(0, 0, 0, 0.38),
             0 0 30px rgba(201, 168, 106, 0.28),
-            0 0 0 1px rgba(255, 255, 255, 0.45) inset;
+            0 0 0 1px rgba(245, 245, 242, 0.22) inset;
     }
     
     .profile-image {
@@ -91,9 +91,9 @@ import profileImage from '../assets/portfolio/profile.jpg';
         object-fit: cover;
         display: block;
         border-radius: 6px;
-        background: rgba(255, 255, 255, 0.92);
-        border: 0.5px solid rgba(201, 168, 106, 0.28);
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.55) inset;
+        background: rgba(36, 36, 36, 0.92);
+        border: 0.5px solid var(--color-border);
+        box-shadow: 0 0 0 1px rgba(245, 245, 242, 0.3) inset;
     }
 
     .bio-content {
@@ -191,12 +191,12 @@ import profileImage from '../assets/portfolio/profile.jpg';
             aspect-ratio: auto;
             overflow: visible;
             padding: 8px;
-            border: 0.5px solid rgba(201, 168, 106, 0.45);
+            border: 0.5px solid var(--color-border);
             border-radius: 8px;
             box-shadow:
                 0 10px 20px rgba(0, 0, 0, 0.3),
                 0 0 24px rgba(201, 168, 106, 0.24),
-                0 0 0 1px rgba(255, 255, 255, 0.4) inset;
+                0 0 0 1px rgba(245, 245, 242, 0.22) inset;
         }
         .profile-image {
             width: 100%;
@@ -205,7 +205,7 @@ import profileImage from '../assets/portfolio/profile.jpg';
             object-position: center top;
             border-radius: 4px;
             border: none;
-            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            box-shadow: 0 0 0 1px rgba(245, 245, 242, 0.3) inset;
         }
         .philosophy-grid {
             grid-template-columns: 1fr;

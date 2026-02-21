@@ -5,19 +5,11 @@ interface Props {
 const { theme = 'dark' } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-<nav class:list={["nav-container", `theme-${theme}`]}>
+<nav class={`nav-container theme-${theme}`}>
     <div class="logo">
         <a href={base + "/"}>
-            <span class="logo-main">Wondimu</span>
-            <span class="logo-sub">'Your Brother'</span>
-            <span class="logo-main">Photography</span>
+            <img class="logo-image" src={base + "/logo.png"} alt="Wondimu Photography logo" />
         </a>
-        <span class="logo-divider" aria-hidden="true"></span>
-        <img
-            class="logo-flag"
-            src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Flag_of_Ethiopia_%281897%E2%80%931974%29.svg"
-            alt="Ethiopian flag"
-        />
     </div>
     <ul class="nav-links">
         <li><a href={base + "/"}>Home</a></li>
@@ -40,71 +32,38 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         top: 0;
         z-index: 1000;
         box-sizing: border-box;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid var(--color-border);
         transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
     .nav-container.theme-light {
-        background: rgba(255, 255, 255, 0.95);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        background: var(--color-bg);
+        border-bottom: 1px solid var(--color-border);
     }
 
     .logo {
         display: flex;
         align-items: center;
         gap: 0.45rem;
-        padding: 0.35rem 0.55rem;
-        border: 1px solid rgba(255, 255, 255, 0.14);
+        padding: 0.5rem 0.8rem;
+        border: 1px solid var(--color-border);
         border-radius: 0.45rem;
-        background: rgba(255, 255, 255, 0.03);
+        background: var(--color-surface);
     }
     .logo a {
-        display: flex;
-        flex-direction: column;
+        display: inline-flex;
         align-items: center;
-        text-align: center;
-        line-height: 1;
-        font-family: var(--font-serif);
-        letter-spacing: 0.1em;
-        font-weight: 700;
-        color: var(--color-text); /* Uses CSS var from Layout's global defined class */
     }
-    .logo-main {
-        font-size: 1.5rem;
-        text-transform: uppercase;
-    }
-    .logo-sub {
-        font-size: 0.75rem;
-        letter-spacing: 0.16em;
-        margin: 0.2rem 0;
-        text-transform: none;
-    }
-    .logo-divider {
-        width: 1px;
-        height: 2.9rem;
-        background: rgba(255, 255, 255, 0.25);
-        flex: 0 0 auto;
-    }
-    .logo-flag {
-        width: auto;
-        height: 2.9rem;
-        max-width: none;
-        flex: 0 0 auto;
+    .logo-image {
+        width: min(58vw, 560px);
+        min-width: 300px;
+        height: auto;
         display: block;
-        filter: saturate(0.88) brightness(0.94);
-        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
-        border-radius: 2px;
         object-fit: contain;
     }
     .nav-container.theme-light .logo {
-        border-color: rgba(0, 0, 0, 0.12);
-        background: rgba(0, 0, 0, 0.03);
-    }
-    .nav-container.theme-light .logo-divider {
-        background: rgba(0, 0, 0, 0.2);
-    }
-    .nav-container.theme-light .logo-flag {
-        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.14);
+        border-color: var(--color-border);
+        background: var(--color-surface);
     }
     .nav-links {
         display: flex;
@@ -120,7 +79,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         color: var(--color-muted);
     }
     .nav-links a:hover, .nav-links a[aria-current="page"] {
-        color: var(--color-text);
+        color: var(--color-accent);
     }
     
     @media (max-width: 768px) {
@@ -134,22 +93,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
             flex-wrap: wrap;
             justify-content: center;
         }
-        .logo a {
-            align-items: center;
-        }
         .logo {
             justify-content: center;
-            padding: 0.3rem 0.45rem;
+            padding: 0.35rem 0.55rem;
         }
-        .logo-main {
-            font-size: 1.3rem;
-        }
-        .logo-sub {
-            font-size: 0.68rem;
-        }
-        .logo-divider,
-        .logo-flag {
-            height: 2.5rem;
+        .logo-image {
+            width: min(86vw, 420px);
+            min-width: 240px;
+            height: auto;
         }
     }
 </style>

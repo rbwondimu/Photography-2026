@@ -43,7 +43,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), #222; /* Fallback/Placeholder */
+		background: linear-gradient(rgba(26, 26, 26, 0.58), rgba(26, 26, 26, 0.58)), var(--color-bg);
         background-size: cover;
         background-position: center;
 		text-align: center;
@@ -65,7 +65,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     .cta-button {
         display: inline-block;
         padding: 1rem 2rem;
-        border: 1px solid var(--color-text);
+        border: 1px solid var(--color-accent);
         color: var(--color-text);
         text-transform: uppercase;
         letter-spacing: 0.1em;
@@ -73,7 +73,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         transition: all 0.3s ease;
     }
     .cta-button:hover {
-        background: var(--color-text);
+        background: var(--color-accent);
         color: var(--color-bg);
     }
 
@@ -92,7 +92,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     .view-all-btn {
         display: inline-block;
         padding: 1rem 2rem;
-        border: 1px solid var(--color-muted);
+        border: 1px solid var(--color-border);
         color: var(--color-text);
         text-transform: uppercase;
         letter-spacing: 0.1em;
@@ -107,8 +107,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     /* About Teaser */
     .about-teaser {
         padding: var(--spacing-xl) 10%;
-        background: #222;
+        background: var(--color-surface);
         text-align: center;
+        border-top: 1px solid var(--color-border);
+        border-bottom: 1px solid var(--color-border);
     }
     .about-teaser p {
         font-size: 1.2rem;
