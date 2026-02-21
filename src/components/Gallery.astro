@@ -157,6 +157,15 @@ if (seamless) {
         images.shift();
     }
 
+    // Requested manual tweak: remove the 9th and 15th photos in the portfolio.
+    // We remove the 15th image (index 14) first so it doesn't affect the 9th image (index 8).
+    if (images.length > 14) {
+        images.splice(14, 1);
+    }
+    if (images.length > 8) {
+        images.splice(8, 1);
+    }
+
     // Keep the request-specific ordering tweak for the seamless portfolio:
     // move the current 4th image to the end of the sequence.
     if (images.length > 3) {
@@ -168,6 +177,14 @@ if (seamless) {
 // Requested manual tweak: remove 1st photo in portfolio. This makes the 2nd image the new 1st one.
 if (!seamless && images.length > 0) {
     images.shift();
+}
+
+// Requested manual tweak: remove the 9th and 15th photos in the portfolio.
+if (!seamless && images.length > 14) {
+    images.splice(14, 1);
+}
+if (!seamless && images.length > 8) {
+    images.splice(8, 1);
 }
 
 // Requested manual tweak: move current 4th image to the end.
