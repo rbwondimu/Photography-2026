@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import profileImage from '../assets/portfolio/profile.jpg';
+import profileImage from '../assets/portfolio/profile 2.jpg';
 ---
 
 <Layout title="About Me | Wondimu Photography">
@@ -35,17 +35,23 @@ import profileImage from '../assets/portfolio/profile.jpg';
         <section class="philosophy">
             <h2>My Philosophy</h2>
             <div class="philosophy-grid">
-                <div class="item">
+                <div class="item item-authenticity">
                     <h3>Authenticity</h3>
-                    <p>Capturing real moments and genuine emotions.<br />The glance. The breath. The almost-missed moment.</p>
+                    <p>
+                        <span class="auth-line">Capturing real moments and genuine emotions.</span><br />
+                        <span class="auth-line">The glance. The breath. The almost-missed moment.</span>
+                    </p>
                 </div>
                 <div class="item item-timelessness">
                     <h3>Timelessness</h3>
-                    <p>Soft grain, honest light, enduring beauty.<br /><span class="timeless-line">These are not just photographs - they are the beginning of your story.</span></p>
+                    <p>Soft grain, honest light, enduring beauty.<br /><span class="timeless-line">These are not just photographs, they are the beginning of your story.</span></p>
                 </div>
                 <div class="item item-connection">
                     <h3>Connection</h3>
-                    <p><span class="connection-line-1">Each image is deliberate. No excess. No overshooting.</span><br /><span class="connection-line">Every story is different and I take the time to understand yours.</span></p>
+                    <p>
+                        <span class="connection-line-1">Each image is deliberate. No excess. No overshooting.</span><br />
+                        <span class="connection-line">Every story is different and I take the time to understand yours.</span>
+                    </p>
                 </div>
             </div>
         </section>
@@ -64,7 +70,7 @@ import profileImage from '../assets/portfolio/profile.jpg';
         align-items: center;
         justify-content: center;
         gap: var(--spacing-xl);
-        padding: var(--spacing-xl) 10%;
+        padding: calc(var(--spacing-xl) * 0.7) 10% calc(var(--spacing-lg) * 1.1);
         min-height: 60vh;
     }
 
@@ -98,12 +104,18 @@ import profileImage from '../assets/portfolio/profile.jpg';
 
     .bio-content {
         max-width: 760px;
+        text-align: center;
     }
 
     .intro {
         font-size: 1.5rem;
         color: var(--color-accent);
         font-family: var(--font-serif);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .bio-content h1 {
+        font-size: 2.5rem;
         margin-bottom: var(--spacing-md);
     }
 
@@ -114,8 +126,7 @@ import profileImage from '../assets/portfolio/profile.jpg';
     }
 
     .bio-content p:not(.intro) {
-        text-align: justify;
-        text-justify: inter-word;
+        text-align: center;
         font-size: 0.98rem;
         line-height: 1.6;
         margin-bottom: 0.9rem;
@@ -123,66 +134,86 @@ import profileImage from '../assets/portfolio/profile.jpg';
 
     .philosophy {
         background: var(--color-bg);
-        padding: calc(var(--spacing-xl) * 0.7) 7%;
+        padding: calc(var(--spacing-md) * 0.7) 7% calc(var(--spacing-xl) * 0.75);
         text-align: center;
     }
 
     .philosophy h2 {
-        font-size: 1.8rem;
-        margin-bottom: calc(var(--spacing-md) + 0.5rem);
+        font-size: 2.5rem;
+        margin-bottom: calc(var(--spacing-md) + 1rem);
         text-align: center;
     }
 
     .philosophy-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: var(--spacing-md);
+        grid-template-columns: 1fr 1.55fr 1fr;
+        grid-template-areas: "auth timeless connection";
+        gap: calc(var(--spacing-md) * 1.2);
         align-items: start;
-        max-width: 1200px;
+        max-width: 1260px;
         margin: 0 auto;
     }
     .philosophy .item {
         text-align: center;
     }
+    .item-authenticity {
+        grid-area: auth;
+        justify-self: start;
+    }
+    .item-timelessness {
+        grid-area: timeless;
+        justify-self: center;
+        max-width: 620px;
+        width: 100%;
+    }
+    .item-connection {
+        grid-area: connection;
+        justify-self: end;
+    }
 
     .item h3 {
-        font-size: 1.12rem;
+        font-size: 1.5rem;
         color: var(--color-accent);
         margin-bottom: var(--spacing-sm);
+        text-align: center;
     }
     .philosophy .item p {
-        font-size: 0.86rem;
-        line-height: 1.4;
+        font-size: 0.96rem;
+        line-height: 1.5;
         letter-spacing: 0.01em;
         margin-bottom: 0;
     }
     .timeless-line {
         display: inline-block;
         white-space: nowrap;
-        font-size: 0.86rem;
+        font-size: 0.96rem;
+    }
+    .auth-line {
+        display: inline-block;
+        white-space: nowrap;
+        font-size: 0.96rem;
     }
     .connection-line {
         display: inline-block;
         white-space: nowrap;
-        font-size: 0.86rem;
+        font-size: 0.96rem;
     }
     .connection-line-1 {
         display: inline-block;
         white-space: nowrap;
-        font-size: 0.86rem;
+        font-size: 0.96rem;
     }
 
     @media (max-width: 768px) {
         main {
-            padding-top: 130px; /* Taller stacked mobile nav */
+            padding-top: 80px; /* Compact mobile nav */
         }
         .bio-section {
             flex-direction: column;
             text-align: center;
         }
         .bio-content p:not(.intro) {
-            text-align: left;
-            text-justify: auto;
+            text-align: center;
         }
         .profile-image-container {
             width: 100%;
@@ -209,14 +240,29 @@ import profileImage from '../assets/portfolio/profile.jpg';
         }
         .philosophy-grid {
             grid-template-columns: 1fr;
+            grid-template-areas:
+                "timeless"
+                "auth"
+                "connection";
+            gap: var(--spacing-lg);
+        }
+        .item-authenticity,
+        .item-timelessness,
+        .item-connection {
+            justify-self: center;
+            max-width: none;
+            width: 100%;
         }
         .philosophy {
-            padding: var(--spacing-lg) 7%;
+            padding: var(--spacing-md) 7% var(--spacing-lg);
         }
         .philosophy h2 {
-            margin-bottom: var(--spacing-md);
+            margin-bottom: calc(var(--spacing-md) + 1rem);
         }
         .timeless-line {
+            white-space: normal;
+        }
+        .auth-line {
             white-space: normal;
         }
         .connection-line {

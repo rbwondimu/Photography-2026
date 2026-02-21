@@ -19,8 +19,10 @@ let images = Object.keys(allImages);
 // Or just random? Let's stick to default sort for now.
 images.sort();
 
-// Keep About-only profile photo out of the portfolio gallery.
-images = images.filter((path) => !path.endsWith('/profile.jpg'));
+// Keep non-portfolio branding assets out of the portfolio gallery.
+images = images.filter(
+    (path) => !path.endsWith('/profile.jpg') && !path.endsWith('/logo.png')
+);
 
 // Build a more visually balanced sequence by interleaving filename groups
 // so similar shots are less likely to appear back-to-back.

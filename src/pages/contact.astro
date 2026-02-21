@@ -53,6 +53,7 @@ import Layout from '../layouts/Layout.astro';
                     <div class="form-group">
                         <label for="type">Session Type</label>
                         <select id="type" name="type">
+                            <option value="engagement">Engagement</option>
                             <option value="event">Event</option>
                             <option value="portrait">Portrait</option>
                             <option value="tour">Tour</option>
@@ -227,7 +228,7 @@ import Layout from '../layouts/Layout.astro';
 
     @media (max-width: 768px) {
         main {
-            padding-top: 130px; /* Taller stacked mobile nav */
+            padding-top: 80px; /* Compact mobile nav */
         }
     }
 </style>
