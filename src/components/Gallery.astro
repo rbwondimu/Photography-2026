@@ -172,6 +172,14 @@ if (seamless) {
         const fourth = images.splice(3, 1)[0];
         images.push(fourth);
     }
+
+    // Requested manual tweak: remove the 8th and 13th photos in the portfolio.
+    if (images.length > 12) {
+        images.splice(12, 1);
+    }
+    if (images.length > 7) {
+        images.splice(7, 1);
+    }
 }
 
 // Requested manual tweak: remove 1st photo in portfolio. This makes the 2nd image the new 1st one.
@@ -191,6 +199,14 @@ if (!seamless && images.length > 8) {
 if (!seamless && images.length > 3) {
     const fourth = images.splice(3, 1)[0];
     images.push(fourth);
+}
+
+// Requested manual tweak: remove the 8th and 13th photos in the portfolio.
+if (!seamless && images.length > 12) {
+    images.splice(12, 1);
+}
+if (!seamless && images.length > 7) {
+    images.splice(7, 1);
 }
 
 // Requested Featured tweak: when showing 6 images, swap positions 5 and 6.
